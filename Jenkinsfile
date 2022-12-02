@@ -11,7 +11,7 @@ pipeline {
             timeout(time: 120, unit: 'SECONDS'){
                 waitUntil {
                    script {
-                        sh ...
+                        sh """
                             try {
                                 
                                     echo "$params.VERSION_BRANCH"
@@ -24,7 +24,7 @@ pipeline {
                             catch (execption){
                                 return false
                             }
-                            ...
+                            """
                    }
                 
                 }
