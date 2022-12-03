@@ -32,14 +32,17 @@ pipeline {
             }
         }
         
-        stage('GitLabWebHookCause') {
+        stage('branch_exist') {
             
             when {
-                  beforeAgent true
-                 triggeredBy 'GitLabWebHookCause'
-            }
+                
+                 
+                 allof {
+                        branch_exist='true' 
+                        triggeredBy cause: 'UserIdCause'
+                    }
 
-
+                    beforeAgent true
                 stages {
                     
                        
