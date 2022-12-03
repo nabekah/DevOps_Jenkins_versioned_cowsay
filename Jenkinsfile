@@ -39,7 +39,8 @@ pipeline {
 
 
                 stages {
-                    stage ('inner1'){
+                    stages {
+                       
                         stage('Build') { 
                                     steps { 
                                         script{
@@ -94,11 +95,15 @@ pipeline {
                         } 
                     }
 
-                    stage('inner2'){
+                    stage ('inner2') {
+                        steps{
+                            echo('hello')
+                        }
 
                     }   
                 
                 }
+        }
     }
     
 }
