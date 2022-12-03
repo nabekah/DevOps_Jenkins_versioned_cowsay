@@ -49,7 +49,7 @@ pipeline {
                                 stage('Build') { 
                                             steps { 
                                                 script{
-                                                    app = docker.build("noah-jenkins-ecr-repo", "./src")
+                                                    app = docker.build("noah-jenkins-ecr-repo", ".")
                                                 
                                                     }
                                                 }
