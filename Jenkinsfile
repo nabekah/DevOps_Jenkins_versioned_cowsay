@@ -59,7 +59,7 @@ pipeline {
                                     steps {
                                     script{
                                             
-                                            sh 'docker run -p8083:8080 --name cowsaytest noah-jenkins-ecr-repo'
+                                            sh 'docker run -d -p8083:8080 --name cowsaytest noah-jenkins-ecr-repo'
                                             sh "curl http://0.0.0.0:8083"
                                             }
                                     }
