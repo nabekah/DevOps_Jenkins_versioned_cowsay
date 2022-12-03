@@ -34,15 +34,13 @@ pipeline {
         
         stage('branch_exist') {
             
-            when {
+                 when {
                 
-                 
                     
-                    branch_exist='true' 
                     triggeredBy cause: 'UserIdCause'
                     
                     beforeAgent true
-                 }
+                }
 
                     
                 stages {
