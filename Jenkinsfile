@@ -58,9 +58,9 @@ pipeline {
                                 stage('Test'){
                                     steps {
                                     script{
-                                            sh "docker -d p'8087:8082' --name cowsaytest ${}:$tag"
-                                            sh "sleep 8"
-                                            sh "curl http://ec-unbutu-ec2-larg:8087"
+                                            
+                                            sh 'docker run -p8083:8083 --name cowsaytest noah-jenkins-ecr-repo'
+                                            sh "curl http://0.0.0.0:8083"
                                             }
                                     }
                                 }

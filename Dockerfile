@@ -2,7 +2,7 @@ FROM node:8.11-alpine
 
 RUN mkdir -p /app/code
 WORKDIR /app/code
-EXPOSE 8080
+EXPOSE 8083
 
 COPY src/package.json src/package-lock.json /app/code/
 RUN npm i
