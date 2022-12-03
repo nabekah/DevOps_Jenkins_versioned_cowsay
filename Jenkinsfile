@@ -37,10 +37,10 @@ pipeline {
             when {
                 
                  
-                    allof {
-                        branch_exist='true' 
-                        triggeredBy cause: 'UserIdCause'
-                    }
+                    
+                    branch_exist='true' 
+                    triggeredBy cause: 'UserIdCause'
+                    
                     beforeAgent true
                  }
 
@@ -87,6 +87,7 @@ pipeline {
        
     
     
+        }
     }
 
     post {
