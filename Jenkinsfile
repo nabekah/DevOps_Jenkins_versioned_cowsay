@@ -11,6 +11,7 @@ pipeline {
     }
 
     agent any
+
     stages {
         stage ('prompt for input') {
             steps{
@@ -39,71 +40,69 @@ pipeline {
 
 
                 stages {
-                    stages {
+                    
                        
-                        stage('Build') { 
-                                    steps { 
+                                stage('Build') { 
+                                            steps { 
+                                                script{
+                                                    app = docker.build("noah-jenkins-ecr-repo", "./src")
+                                                
+                                                    }
+                                                }
+                                }
+                                
+                                stage('Test'){
+                                    steps {
+                                    script{
+                                            sh "docker -d p'8087:8082' --name cowsaytest ${}:$tag"
+                                            sh "sleep 8"
+                                            sh "curl http://ec-unbutu-ec2-larg:8087"
+                                            }
+                                    }
+                                }
+
+                                stage('Deploy to Ecr') {
+                                    steps {
                                         script{
-                                            app = docker.build("noah-jenkins-ecr-repo", "./src")
-                                           
                                             
+                                            docker.withRegistry('https://644435390668.dkr.ecr.us-west-2.amazonaws.com/noah-jenkins-ecr-repo', 'ecr:us-west-2:69e49cf8-529f-45b4-bb52-cee6a094adca') {
+                                                app.push("${env.BUILD_NUMBER}")
                                             }
                                         }
                                     }
-                        }
-                        stage('Test'){
-                            steps {
-                            script{
-                                    sh "docker -d p'8087:8082' --name cowsaytest ${}:$tag"
-                                    sh "sleep 8"
-                                    sh "curl http://ec-unbutu-ec2-larg:8087"
-                                    }
-                            }
-                        }
+                                }   
 
-                        stage('Deploy to Ecr') {
-                            steps {
-                                script{
-                                    
-                                     docker.withRegistry('https://644435390668.dkr.ecr.us-west-2.amazonaws.com/noah-jenkins-ecr-repo', 'ecr:us-west-2:69e49cf8-529f-45b4-bb52-cee6a094adca') {
-                                     app.push("${env.BUILD_NUMBER}")
-                                }
-                            }
-                        }   
+                                
+                    
 
-                        post {
-
-                                    success {
-                            
-                                        updateGitlabCommitStatus name: 'build', state: 'success'
-                            
-                                    }
-                            
-                                    failure {
-                            
-                                        updateGitlabCommitStatus name: 'build', state: 'failed'
-                            
-                                    }
-                            
-                                    always {
-                            
-                                        emailext attachLog: true, body: "Cowsay build ${currentBuild.currentResult}", compressLog: true, recipientProviders: [culprits(), previous()], subject: "Build ${currentBuild.currentResult}", to: 'immanuelcromwell@gmail.com'
-                            
-                                        echo 'Cle'
-                                    }
-                
-                        } 
-                    }
-
-                    stage ('inner2') {
-                        steps{
-                            echo('hello')
-                        }
-
-                    }   
+                    
                 
                 }
         }
-    }
     
+    
+    }
+
+    post {
+
+                                            success {
+                                    
+                                                updateGitlabCommitStatus name: 'build', state: 'success'
+                                    
+                                            }
+                                    
+                                            failure {
+                                    
+                                                updateGitlabCommitStatus name: 'build', state: 'failed'
+                                    
+                                            }
+                                    
+                                            always {
+                                    
+                                                emailext attachLog: true, body: "Cowsay build ${currentBuild.currentResult}", compressLog: true, recipientProviders: [culprits(), previous()], subject: "Build ${currentBuild.currentResult}", to: 'immanuelcromwell@gmail.com'
+                                    
+                                                echo 'Cle'
+                                            }
+                        
+    } 
 }
