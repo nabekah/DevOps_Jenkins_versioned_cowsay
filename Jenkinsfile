@@ -1,3 +1,4 @@
+def branch_exist = "false"
 pipeline {
     
     parameters {
@@ -6,9 +7,7 @@ pipeline {
   
     }
 
-    environment{
-         BRANCHEXIST = "false"
-    }
+   
 
     agent any
 
@@ -20,12 +19,12 @@ pipeline {
                                 
                                     echo "$params.VERSION_BRANCH"
                                     git branch: "${params.VERSION_BRANCH}" , credentialsId: 'feefb181-a57e-4003-9f28-9487d93d1122', url: 'http://34.222.28.140:8086/ekow_developer/cowsay-versioned.git'    
-                                    step(environment{ BRANCHEXIST = "true"})
-                                    script {
                                     
+                                    script {
+                                    branch_exist = "true"
                                     echo ' inside error trap'
                                   
-                                    echo "'${env.BRANCHEXIST}'"
+                                    echo "'${branch_exist}'"
                                    }
                 
             }
