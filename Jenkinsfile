@@ -104,9 +104,9 @@ pipeline {
                                     
                                             always {
                                     
-                                                emailext attachLog: true, body: "Cowsay build ${currentBuild.currentResult}", compressLog: true, recipientProviders: [culprits(), previous()], subject: "Build ${currentBuild.currentResult}", to: 'immanuelcromwell@gmail.com'
+                                                emailext attachLog: true, body: "Cowsay build ${currentBuild.currentResult}", compressLog: true, recipientProviders: [culprits(), previous()], subject: "Build ${currentBuild.currentResult}", to: 'abekah.ekow@gmail.com'
                                     
-                                                echo 'Cle'
+                                                echo 'noah'
                                             }
                         
     } 
