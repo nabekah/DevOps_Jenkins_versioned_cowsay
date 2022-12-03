@@ -2,7 +2,7 @@
 
 if [ "$#" -ne 1 ]
 then
-  PORT=8083
+  PORT=8080
 else
   PORT=$1
 fi
