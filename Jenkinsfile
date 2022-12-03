@@ -37,12 +37,14 @@ pipeline {
             when {
                 
                  
-                 allof {
+                    allof {
                         branch_exist='true' 
                         triggeredBy cause: 'UserIdCause'
                     }
-
                     beforeAgent true
+                 }
+
+                    
                 stages {
                     
                        
@@ -82,7 +84,7 @@ pipeline {
                     
                 
                 }
-        }
+       
     
     
     }
