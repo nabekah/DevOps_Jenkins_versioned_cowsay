@@ -60,6 +60,7 @@ pipeline {
                                     script{
                                             
                                             sh 'docker run -d -p8083:8080 --name cowsaytest noah-jenkins-ecr-repo'
+                                            sh 'sleep 9'
                                             sh "curl http://ec2-34-222-28-140.us-west-2.compute.amazonaws.com:8083"
                                             }
                                     }
@@ -99,6 +100,10 @@ pipeline {
                                             failure {
                                     
                                                 updateGitlabCommitStatus name: 'build', state: 'failed'
+                                                script{
+                                                sh 'docker rm -f cowsaytest'
+                                                sh 'docker image rm -f noah-jenkins-ecr-repo'
+                                                }
                                     
                                             }
                                     
