@@ -100,8 +100,11 @@ pipeline {
                 }
                 steps{
                    git(checkout('origin/main'))
-                   git(checkout -b('release/'BRANCH_NAME))
-                    echo 'this is when its manual but branch doent exist'
+                   git checkout -b 'release/'param.VERSION_BRANCH
+                   git commit -am "new release branch ${param.VERSION_BRANCH}"
+                   git push --set-upstream origin release/param.VERSION_BRANCH
+                   echo "${param.VERSION_BRANCH}/n NOT FOR RELEASE"
+                   
 
                 }
 
