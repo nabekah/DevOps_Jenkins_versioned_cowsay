@@ -1,4 +1,4 @@
-def branch_exist = "false"
+def branch_exist = false
 pipeline {
     
     parameters {
@@ -18,8 +18,9 @@ pipeline {
                                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                                 
                                     echo "$params.VERSION_BRANCH"
-                                    git branch: "${params.VERSION_BRANCH}" , credentialsId: 'feefb181-a57e-4003-9f28-9487d93d1122', url: 'http://34.222.28.140:8086/ekow_developer/cowsay-versioned.git'    
                                     echo branch_exist
+                                    git branch: "${params.VERSION_BRANCH}" , credentialsId: 'feefb181-a57e-4003-9f28-9487d93d1122', url: 'http://34.222.28.140:8086/ekow_developer/cowsay-versioned.git'    
+                                   
                                     script {
                                     branch_exist = true
                                     echo ' inside error trap'
