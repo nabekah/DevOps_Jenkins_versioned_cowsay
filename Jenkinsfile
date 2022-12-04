@@ -100,10 +100,10 @@ pipeline {
                 }
                 steps{
                    git(checkout('origin/main'))
-                   git checkout -b 'release/'param.VERSION_BRANCH
-                   git commit -am "new release branch ${param.VERSION_BRANCH}"
-                   git push --set-upstream origin release/param.VERSION_BRANCH
-                   echo "${param.VERSION_BRANCH}/n NOT FOR RELEASE"
+                   sh git checkout -b 'release/'param.VERSION_BRANCH
+                   sh git commit -am "new release branch ${param.VERSION_BRANCH}"
+                   sh git push --set-upstream origin release/param.VERSION_BRANCH
+                   echo "${param.VERSION_BRANCH}/n NOT FOR RELEASE" > v.txt
                    
 
                 }
