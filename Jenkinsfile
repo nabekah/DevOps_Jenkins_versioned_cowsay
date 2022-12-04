@@ -32,7 +32,7 @@ pipeline {
             }
         }
         
-        stage('branch_exist') {
+        stage('perform CI for existing branch') {
             
                  when {
                     allOf{
@@ -87,6 +87,21 @@ pipeline {
        
     
     
+        }
+        stage('create new Release branch') {
+            when {
+                    allOf{
+                        expression{ branch_exist == false}
+                        triggeredBy cause: 'UserIdCause'
+                    }
+                        
+                        beforeAgent true
+                }
+                steps{
+                    echo 'this is when its manual but branch doent exist'
+
+                }
+
         }
     }
 
