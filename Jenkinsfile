@@ -99,6 +99,8 @@ pipeline {
                         beforeAgent true
                 }
                 steps{
+                   git(checkout('origin/main'))
+                   git(checkout -b('release/'BRANCH_NAME))
                     echo 'this is when its manual but branch doent exist'
 
                 }
