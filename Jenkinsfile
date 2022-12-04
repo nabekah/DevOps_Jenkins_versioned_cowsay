@@ -101,6 +101,8 @@ pipeline {
                 steps{
                     script{
                        sh """
+                        git config --global user.email "abekah.ekow@gmail.com"
+                        git config --global user.name "the developer ekow"
                         git checkout origin/main
                         git checkout -b release/${params.VERSION_BRANCH}
                         git commit -am "new release branch ${params.VERSION_BRANCH}"
