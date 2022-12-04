@@ -102,10 +102,10 @@ pipeline {
                     script{
                        sh """
                         git checkout origin/main
-                        git checkout -b release/${param.VERSION_BRANCH}
-                        git commit -am "new release branch ${param.VERSION_BRANCH}"
-                        git push --set-upstream origin release/${param.VERSION_BRANCH}
-                        echo "${param.VERSION_BRANCH}/n NOT FOR RELEASE" > v.txt
+                        git checkout -b release/${params.VERSION_BRANCH}
+                        git commit -am "new release branch ${params.VERSION_BRANCH}"
+                        git push --set-upstream origin release/${params.VERSION_BRANCH}
+                        echo "${params.VERSION_BRANCH}/n NOT FOR RELEASE" > v.txt
                         """
                     }
                   
