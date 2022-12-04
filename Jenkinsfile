@@ -35,7 +35,7 @@ pipeline {
         stage('branch_exist') {
             
                  when {
-                    allof{
+                    allOf{
                         expression{ branch_exist == true}
                         triggeredBy cause: 'UserIdCause'
                     }
