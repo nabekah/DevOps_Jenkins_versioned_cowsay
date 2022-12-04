@@ -35,11 +35,12 @@ pipeline {
         stage('branch_exist') {
             
                  when {
-                
-                   expression{ branch_exist == true}
-                    triggeredBy cause: 'UserIdCause'
-                    
-                    beforeAgent true
+                    allof{
+                        expression{ branch_exist == true}
+                        triggeredBy cause: 'UserIdCause'
+                    }
+                        
+                        beforeAgent true
                 }
 
                     
