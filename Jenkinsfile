@@ -36,7 +36,7 @@ pipeline {
             
                  when {
                 
-                    
+                    script{"${branch_exist} == 'true'"}
                     triggeredBy cause: 'UserIdCause'
                     
                     beforeAgent true
@@ -100,15 +100,16 @@ pipeline {
                                             failure {
                                     
                                                 updateGitlabCommitStatus name: 'build', state: 'failed'
-                                                script{
-                                                sh 'docker rm -f cowsaytest'
-                                                sh 'docker image rm -f noah-jenkins-ecr-repo'
-                                                }
+                                                
                                     
                                             }
                                     
                                             always {
                                     
+                                                script{
+                                                sh 'docker rm -f cowsaytest'
+                                                sh 'docker image rm -f noah-jenkins-ecr-repo'
+                                                }
                                                 emailext attachLog: true, body: "Cowsay build ${currentBuild.currentResult}", compressLog: true, recipientProviders: [culprits(), previous()], subject: "Build ${currentBuild.currentResult}", to: 'abekah.ekow@gmail.com'
                                     
                                                 echo 'noah'
