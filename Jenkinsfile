@@ -105,7 +105,7 @@ pipeline {
                         git config --global user.name "the developer ekow"
                         git checkout origin/main
                         git checkout -b release/${params.VERSION_BRANCH}
-                        git commit -am "new release branch ${params.VERSION_BRANCH}"
+                      //  git commit -am "new release branch ${params.VERSION_BRANCH}"
                         git push --set-upstream origin release/${params.VERSION_BRANCH}
                         echo "${params.VERSION_BRANCH}/n NOT FOR RELEASE" > v.txt
                         """
