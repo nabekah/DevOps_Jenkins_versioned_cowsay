@@ -12,7 +12,7 @@ pipeline {
     agent any
 
     stages {
-        stage ('prompt for input') {
+        stage ('checkout') {
             steps{
             
                                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
@@ -33,7 +33,7 @@ pipeline {
             }
         }
         
-        stage('perform CI for existing branch') {
+        stage('check branch') {
             
                  when {
                     allOf{

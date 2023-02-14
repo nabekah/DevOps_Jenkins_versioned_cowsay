@@ -1,0 +1,31 @@
+Cowsay Versioned
+================
+In this excercise you are required to create a "Release" Job for an "on-prem" application.
+The first part will create a manually triggerd job, and after that it will be git triggered.
+
+Instructions:
+-------------
+1. Create a manually triggered jenkins pipeline that accepts version parameter (e.g. '1.2').
+   Script logic:
+   a. If branch `release/{x.y}` does not exist:
+      - Creates the branch from `master`.
+      - Updates `version.txt` to reflect the branch `x.y`, but still includes "NOT FOR RELEASE".
+      - Commits & pushes the branch, with new `version.txt`.
+   b. Pull sources and checkout `release/{x.y}`.
+   c. Calculate and set a set a 3-number version (`x.y.z`) in `version.txt`.
+   d. Build
+   e. Test
+   f. Release (push to ECR) - using the full release version as the tag.
+   g. `git clean` & `git tag` & `git push tag`.
+
+2. Update script to be triggered by push.
+   Script logic:
+   a. When triggered manually - as before.
+   b. When triggered by push:
+      - If on a banch called `release/{x.y}` it will perform release for `x.y`.
+      - If on any other branch - it will just perform build.
+
+
+To hand-in
+----------
+- `Jenkinsfile`
